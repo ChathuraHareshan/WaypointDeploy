@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    @apply bg-[#F7F9FB] text-[#12181F] font-sans antialiased selection:bg-purplePrimary selection:text-white;
+  }
+}
+
+:root {
+  --surface: #FFFFFF;
+  --surface-subtle: #F7F9FB;
+  --surface-muted: #EBEBF8;
+  --surface-border: #DDDDDF;
+
+  --ink: #12181F;
+  --ink-muted: #5F5F79;
+  --ink-faint: #9292B4;
+}
+
+.dark {
+  --surface: #1E2530;
+  --surface-subtle: #151A22;
+  --surface-muted: #243047;
+  --surface-border: #2E3746;
+
+  --ink: #F0E9DD;
+  --ink-muted: #B7A98F;
+  --ink-faint: #6B82A0;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-purplePrimary text-white font-medium
+           px-6 py-2.5 rounded-lg hover:bg-neutral5 transition-colors
+           disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .btn-secondary {
+    @apply bg-white border border-gray3 text-blackCustom
+           font-medium px-6 py-2.5 rounded-lg hover:bg-gray1 transition-colors inline-flex items-center justify-center;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .btn-ghost {
+    @apply text-gray6 font-medium px-4 py-2 rounded-lg
+           hover:bg-gray2 transition-colors inline-flex items-center justify-center;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .input-field {
+    @apply w-full bg-gray1 border border-gray3 rounded-lg px-4 py-3
+           placeholder:text-gray5 focus:outline-none
+           focus:border-purplePrimary focus:bg-white transition-colors text-blackCustom;
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.card {
+  @apply rounded-2xl bg-white dark:bg-[#1E2530] border border-gray-200 dark:border-gray-800 shadow-sm transition p-6;
+}
+
+.dark body {
+  @apply bg-[#151A22] text-[#F0E9DD];
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  border-radius: 24px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+.animate-scaleUp {
+  animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-shake {
+  animation: shake 0.35s ease-in-out;
+}
+
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 180, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 150, 180, 0.5);
+}
+
+.wp-pin{background:#4D4DE9;color:#fff;border-radius:9999px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+
+
+.leaflet-container { position: relative; z-index: 0; }
+.dark .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9); }
+
+.wp-truck { font-size: 26px; line-height: 36px; text-align: center; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45)); }

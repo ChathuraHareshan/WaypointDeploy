@@ -1,0 +1,90 @@
+[
+  {
+    "id": "milk-1l-case12",
+    "name": "Full cream milk 1L (case of 12)",
+    "product": "Full cream milk 1L",
+    "unit": "case of 12",
+    "temp": "Chilled",
+    "sortOrder": 0,
+    "active": true,
+    "weightKg": 12.5,
+    "volumeM3": 0.02
+  },
+  {
+    "id": "yogurt-cups-tray24",
+    "name": "Low-fat yogurt cups (tray of 24)",
+    "product": "Low-fat yogurt cups",
+    "unit": "tray of 24",
+    "temp": "Chilled",
+    "sortOrder": 1,
+    "active": true,
+    "weightKg": 3.0,
+    "volumeM3": 0.01
+  },
+  {
+    "id": "bread-loaf",
+    "name": "Fresh bread loaves (each)",
+    "product": "Fresh bread loaves",
+    "unit": "each",
+    "temp": "Ambient",
+    "sortOrder": 2,
+    "active": true,
+    "weightKg": 0.5,
+    "volumeM3": 0.003
+  },
+  {
+    "id": "chicken-breast-kg",
+    "name": "Chicken breast (kg)",
+    "product": "Chicken breast",
+    "unit": "kg",
+    "temp": "Chilled",
+    "sortOrder": 3,
+    "active": true,
+    "weightKg": 1.0,
+    "volumeM3": 0.002
+  },
+  {
+    "id": "bananas-kg",
+    "name": "Bananas (kg)",
+    "product": "Bananas",
+    "unit": "kg",
+    "temp": "Ambient",
+    "sortOrder": 4,
+    "active": true,
+    "weightKg": 1.0,
+    "volumeM3": 0.003
+  },
+  {
+    "id": "frozen-peas-bag",
+    "name": "Frozen peas (bag)",
+    "product": "Frozen peas",
+    "unit": "bag",
+    "temp": "Chilled",
+    "sortOrder": 5,
+    "active": true,
+    "weightKg": 0.5,
+    "volumeM3": 0.001
+  },
+  {
+    "id": "eggs-tray30",
+    "name": "Eggs (tray of 30)",
+    "product": "Eggs",
+    "unit": "tray of 30",
+    "temp": "Chilled",
+    "sortOrder": 6,
+    "active": true,
+    "weightKg": 2.0,
+    "volumeM3": 0.006
+  },
+  {
+    "id": "water-500ml-case24",
+    "name": "Bottled water 500ml (case of 24)",
+    "product": "Bottled water 500ml",
+    "unit": "case of 24",
+    "temp": "Ambient",
+    "sortOrder": 7,
+    "active": true,
+    "weightKg": 12.5,
+    "volumeM3": 0.02
+  }
+]

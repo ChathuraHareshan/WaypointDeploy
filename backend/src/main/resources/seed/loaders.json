@@ -1,0 +1,82 @@
+[
+{
+"id": "LDR01",
+"name": "Nimal (Loader)",
+"depot": "Peliyagoda"
+},
+{
+"id": "LDR02",
+"name": "Kasun (Loader)",
+"depot": "Peliyagoda"
+},
+{
+"id": "LDR03",
+"name": "Ruwan (Loader)",
+"depot": "Peliyagoda"
+},
+{
+"id": "LDR04",
+"name": "Saman (Loader)",
+"depot": "Peliyagoda"
+},
+{
+"id": "LDR05",
+"name": "Tharindu (Loader)",
+"depot": "Peliyagoda"
+},
+{
+"id": "LDR06",
+"name": "Chamara (Loader)",
+"depot": "Peliyagoda"
+},
+{
+"id": "LDR07",
+"name": "Dilan (Loader)",
+"depot": "Peliyagoda"
+},
+{
+"id": "LDR08",
+"name": "Isuru (Loader)",
+"depot": "Peliyagoda"
+},
+{
+"id": "LDR09",
+"name": "Pradeep (Loader)",
+"depot": "Peliyagoda"
+},
+{
+"id": "LDR10",
+"name": "Lakmal (Loader)",
+"depot": "Peliyagoda"
+},
+{
+"id": "LDR11",
+"name": "Sujith (Loader)",
+"depot": "Peliyagoda"
+},
+{
+"id": "LDR12",
+"name": "Nuwan (Loader)",
+"depot": "Peliyagoda"
+},
+{
+"id": "LDR13",
+"name": "Amal (Loader)",
+"depot": "Kandy"
+},
+{
+"id": "LDR14",
+"name": "Janaka (Loader)",
+"depot": "Kandy"
+},
+{
+"id": "LDR15",
+"name": "Buddhika (Loader)",
+"depot": "Kandy"
+},
+{
+"id": "LDR16",
+"name": "Harsha (Loader)",
+"depot": "Kandy"
+}
+]

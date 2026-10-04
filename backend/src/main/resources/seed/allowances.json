@@ -1,0 +1,38 @@
+[
+{
+"id": "Fresh_rear_dock",
+"minutes": 15
+},
+{
+"id": "Fresh_street",
+"minutes": 16
+},
+{
+"id": "Fresh_mall_bay",
+"minutes": 18
+},
+{
+"id": "Style_rear_dock",
+"minutes": 38
+},
+{
+"id": "Style_street",
+"minutes": 46
+},
+{
+"id": "Style_mall_bay",
+"minutes": 59
+},
+{
+"id": "Tech_rear_dock",
+"minutes": 43
+},
+{
+"id": "Tech_street",
+"minutes": 55
+},
+{
+"id": "Tech_mall_bay",
+"minutes": 55
+}
+]

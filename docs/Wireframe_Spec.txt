@@ -1,0 +1,335 @@
+=== PAGE 1 ===
+Waypoint Group – Delivery Planning System:
+UI/UX Wireframe Spec
+Sep 25, 2026  ·  @Sandipa Hansaja
+Tech-Triathlon 2026 Designathon submission: multi-role delivery planning system
+wireframe specification covering Dispatcher, Loader, Driver, and Store Manager roles, plus
+the shared time-based theme system.
+1. Global Design System
+1.1 AM/PM Adaptive Theme
+Theme switches automatically on device time; a manual override toggle sits in the header
+badge for dispatchers working across shift boundaries.
+Morning Mode — 3:30 AM to 11:59 AM (light, high-contrast, glare-safe for docks and
+outdoor driving)
+Afternoon/Evening Mode — 12:00 PM to 11:59 PM (dark, warm-toned amber/navy, eye-
+strain reduction)
+Token Hex Usage
+--bg-base #F7F9FB App background
+--surface #FFFFFF Cards, panels
+--text-primary #12181F Body text (contrast ratio 15.8:1 on surface)
+--text-secondary #4B5563 Labels, meta text
+--accent-urgent #D63A2E Fresh-delivery urgency (before 8 AM)
+--accent-primary #0F6FDE Primary actions, links
+--success #1E8E5A Confirmed / on-time states
+--warning #C77700 Deferral / delay states
+--border #DDE3EA Dividers, input borders
+Waypoint Group – Delivery Planning System: UI/UX Wireframe Spec
+Page 1 of 11
+=== PAGE 2 ===
+Typography — Inter (UI text), JetBrains Mono (IDs, coordinates, timestamps)
+Minimum tap target 44×44px on tablet/mobile roles (Loader, Driver, Store Manager mobile
+view); minimum body text 15px, scalable to 18px in Driver safe-stop view.
+Contextual Theme Header Badge (all roles): pill-shaped, top-right of nav bar. Shows
+sun/moon glyph + "Morning Mode" / "Evening Mode" text + a live countdown "Fresh cutoff
+in 1h 42m" or "Next window closes 6:15 PM". Tapping expands a mini-panel with the manual
+override switch.
+Token Hex Usage
+--bg-base #151A22 App background
+--surface #1E2530 Cards, panels
+--text-primary #F0E9DD Body text (contrast ratio 12.6:1 on surface)
+--text-secondary #B7A98F Labels, meta text
+--accent-urgent #E8A33D Fresh-delivery urgency, evening ramp alerts
+--accent-primary #4C8DFF Primary actions, links
+--success #4CAF7D Confirmed / on-time states
+--warning #E8A33D Deferral / delay states
+--border #2E3746 Dividers, input borders
+Style Size / Weight Use
+Display 28px / 700 Dashboard KPI numbers
+H1 22px / 700 Screen titles
+H2 17px / 600 Section headers
+Body 15px / 400 Default text
+Body Small 13px / 400 Meta, secondary labels
+Caption 11px / 500, uppercase, tracked +0.04em Status chips, tags
+Waypoint Group – Delivery Planning System: UI/UX Wireframe Spec
+Page 2 of 11
+=== PAGE 3 ===
+1.2 Integrated Logistic Calendar & Events System
+Shared calendar component ( <CalendarWidget> ) surfaces on every role's dashboard as a
+compact strip, expandable to full month view.
+Data sources merged: competition calendar feed (paydays, monsoon windows,
+festivals, public holidays) + live weather alerts + internal ops calendar (blackout dates,
+fleet maintenance).
+Compact strip (default): horizontal 7-day scroller, each day a chip colored by event
+severity (grey = normal, amber = advisory, red = high-impact). Today is highlighted with
+a ring.
+Full month view: standard month grid; tapping a marked day opens a bottom-sheet
+(mobile) or side panel (desktop) listing that day's events with icons ( 🎉  festival, 🌧
+monsoon, 💰  payday, 🏛  holiday).
+Role-based contextual alert card: appears above the fold on the dashboard when an
+event is within 72 hours. Format: [Icon] [Event Name] — [Impact statement] ·
+[Dismiss] [View Plan] .
+Example (Dispatcher): " 🎉  Vesak Festival Ramp Active — Expect +40% Fresh
+Demand across Colombo District. [View Fleet Plan]"
+Example (Driver): " 🌧  Monsoon Heavy Rain Alert — Kandy District. Reduced speed
+advised on Route A9. [Acknowledge]"
+Example (Store Manager): " 💰  Payday Window (25th–27th) — Expect higher order
+volume. Confirm cutoff early. [Noted]"
+Alerts are dismissible per-user but reappear each session until the event passes; high-
+impact (red) alerts cannot be permanently dismissed, only acknowledged.
+2. Role 1 — Dispatcher (Peliyagoda Office, large-screen desktop)
+2.1 Layout: Central Planning Dashboard
+Three-column desktop grid (1920×1080 baseline): Left rail (240px) nav + theme badge;
+Center (flex) Consolidated Queue + Fleet Allocation Engine tabs; Right rail (360px) Live
+Network Map (collapsible) + Calendar strip.
+Top bar: Logo · Search orders/outlets · Theme badge (" ☀  Morning Mode · Fresh cutoff in
+0h 38m") · Notification bell · Profile.
+Tab strip below top bar: Queue  | Fleet Allocation  | Deferrals  | Live Map  |
+Calendar .
+Waypoint Group – Delivery Planning System: UI/UX Wireframe Spec
+Page 3 of 11
+=== PAGE 4 ===
+2.2 Consolidated Queue (post-4PM cutoff)
+Table view, one row per confirmed order: Order ID  · Outlet  · District  · Weight (kg)  ·
+Volume (m³)  · Temp Req  (Reefer/Ambient chip) · Priority  (Fresh/Standard) · Status
+(Unassigned/Assigned/Deferred).
+Header actions: [Auto-Assign All] · [Filter by District ▾ ] · [Filter by Temp ▾ ] · sort by
+priority (default).
+Row click opens a slide-over with full order detail + manual assign control.
+Empty state copy: "No confirmed orders yet — queue populates after the 4:00 PM
+cutoff."
+2.3 Fleet Allocation Engine
+Split view: left = order queue (draggable cards), right = vehicle roster cards ( Van 04 —
+800kg / 3.2m³ — Reefer — Driver: K. Perera — Shift ends 8:00 PM — Fuel: 62% ).
+Auto mode: button [Run Auto-Assignment] — solves against capacity, temp
+compatibility, van-only access flags, fuel quota, and remaining shift budget; result
+shown as a diff ("14 orders assigned, 2 flagged — see below").
+Manual mode: drag order card onto a vehicle card; system blocks the drop and shows
+an inline red banner if a constraint is violated: " ⚠  Exceeds Van 04 capacity by 45kg" /
+" ⚠  Reefer required — Van 04 is Ambient-only" / " ⚠  Driver shift ends in 20 min —
+insufficient time for this stop."
+Toggle switch top-right: Auto ⇄  Manual.
+Confirm bar (sticky bottom): [Lock Fleet Plan] — disabled until all high-priority orders
+are assigned or explicitly deferred.
+2.4 Deferral Management Panel
+Modal triggered from an order's slide-over via [Defer Order].
+Fields: Reason  (dropdown: Capacity exceeded / Access restriction / Weather
+disruption / Driver shift limit / Other) · Notes  (free text, required if "Other") ·
+Reschedule to  (date picker, defaults to next business day).
+Confirm button: [Confirm Deferral]; cancel: [Back to Queue].
+Below the modal trigger, a persistent panel lists Deferral History: Outlet  ·
+Consecutive Skips  (badge turns red at 3+) · Last Reason  · [View Trend] .
+Waypoint Group – Delivery Planning System: UI/UX Wireframe Spec
+Page 4 of 11
+=== PAGE 5 ===
+Alert copy when an outlet crosses 3 consecutive skips: " ⚠  Colombo Fort Pharmacy has
+been deferred 3 times running — escalate to Account Manager?"
+2.5 Live Network Map
+Right-rail embedded map, expandable to full-screen.
+Layers toggle: Drivers  · Traffic  · Disruptions  · Route Lines .
+Driver pins are colored by status (green = on schedule, amber = delayed, red = stopped
+>10 min unexpectedly) and show a live speed index badge.
+Disruption pins (road closure, flooding) pulled from the calendar/weather feed;
+tapping shows a card: " 🚧  Kandy–Peradeniya Rd — partial closure, +25 min detour
+advised."
+Bottom strip: horizontally scrollable driver chips ( K. Perera · Van 04 · ETA next
+stop 14:20 ) — tapping centers the map on that driver.
+2.6 Calendar & Demand Forecast Integration
+Uses the shared <CalendarWidget>  (§1.2), plus a Demand Forecast overlay: each
+calendar day shows a small bar indicating projected order volume vs. average.
+Festival/monsoon days show the projected % uplift or capacity reduction inline ("+40%",
+"−15% capacity"). A [Adjust Fleet for This Day] shortcut jumps to Fleet Allocation pre-
+filtered to that date.
+3. Role 2 — Loader (Peliyagoda/Kandy Docks, shared tablet)
+High-contrast, gloves-usable UI: large tap targets (min 56×56px), bold 2px iconography,
+dock-mode always-on Morning palette (regardless of clock) since dock lighting is artificial
+and glare-prone.
+3.1 Layout: Digital Loading Manifest (home screen)
+Single-column, full-width cards, one per truck run.
+Card header: Run #204 — Van 04 — Dock Bay 3  + live sync indicator (green dot
+"Synced" / amber "Updating…").
+Card body: progress bar "7 of 12 items loaded" + [Open Stop Sequence] primary
+button (full-width, 64px tall).
+Waypoint Group – Delivery Planning System: UI/UX Wireframe Spec
+Page 5 of 11
+=== PAGE 6 ===
+Manifest auto-refreshes when the dispatcher updates the run plan; a toast slides in:
+"Run plan updated — 2 items added, tap to review."
+3.2 Stop Sequence Visualizer
+Vertical numbered list mirroring unload order (last-loaded = first-unloaded logic reversed
+for load order: items for the FINAL stop load first, at the back of the van).
+Each row: [Stop #] [Outlet Name] [Item Count] [Load Position:
+Front/Mid/Rear]  with a checkbox.
+Color coding: grey = pending, blue = in progress, green = loaded & verified.
+Sticky bottom bar: [Mark Stop Loaded] — disabled until every item checkbox in that
+stop is ticked or explicitly flagged (§3.3).
+3.3 Pre-Departure Shortfall & Damage Logger
+Triggered by long-press on an item row, or the [Flag Item] icon.
+Bottom-sheet form: Issue Type  (large icon buttons: 📦  Missing / 💥  Damaged / 🔢
+Quantity Mismatch) → Photo  (camera capture, required for Damaged) → Notes
+(optional voice-to-text supported) → [Submit Flag].
+Flagged items show a red badge on the manifest and stay in the count as "Exception"
+rather than blocking the whole run.
+Confirmation toast: "Flag logged — Dispatcher notified."
+3.4 Pre-Departure Sign-off
+Full-screen final screen before a run can depart: summary "11 of 12 items loaded · 1 flagged
+(Missing)" + [Confirm Load Complete] (large, primary, bottom) + secondary [Review
+Exceptions]. Requires loader's PIN or badge tap to confirm — logs Loader ID ,
+Timestamp , Dock .
+4. Role 3 — Driver (On-road, smartphone, vertical layout)
+Safety-first: no interaction requires more than one glance while stationary; "drive mode"
+locks most controls when GPS speed > 8 km/h, surfacing only voice/audio controls.
+4.1 Safe-Stop Navigation View (default screen)
+Full-screen map (70% viewport), bottom sheet (30%, expandable) with next-action card.
+Waypoint Group – Delivery Planning System: UI/UX Wireframe Spec
+Page 6 of 11
+=== PAGE 7 ===
+Map: current position pin, route polyline, upcoming stop pins numbered in sequence,
+depot pin at route start.
+Bottom sheet collapsed state: [Stop 4 of 9] Kandy City Pharmacy — 2.3 km · ETA
+14:32  + big [Navigate] button.
+When device is moving, sheet auto-collapses to a single-line strip; when parked (speed
+= 0 for >3 sec), sheet expands and unlocks full controls — a subtle banner reads
+"Parked — full controls unlocked."
+4.2 Smart Call & Notification Reminders
+Incoming alerts render as a top banner overlay (never blocking the map), auto-read
+aloud via TTS when moving: "Dispatcher calling" / "Outlet Manager arriving in 5
+minutes" / "Stop window closes in 15 minutes."
+Hands-free actions: swipe-right-to-accept-call (haptic confirm), voice command "Hey
+Waypoint, call dispatcher" wakes a call sheet.
+Stop-window warning escalates: 15 min = amber banner + single chime; 5 min = red
+banner + repeating chime + auto-suggested "Call outlet" action.
+4.3 Arrival & Delivery Execution
+On approach (geofence trigger, ~150m), sheet expands: [I've Arrived] primary button.
+Post-arrival: "Delivery Checklist" card — access constraints surfaced up top in a
+highlighted strip: " ⚠  Rear dock access only" / " ⚠  Mall access: 9 AM–9 PM, use Loading
+Bay B."
+Next-destination preview strip pinned below: "Next: Stop 5 — Peradeniya Mini Mart —
+4.1 km" so the driver can plan before finishing current stop.
+4.4 Proof of Delivery (POD) & Issue Capture
+Screen order: 1) Item checklist (tap to confirm each line) → 2) Signature pad (finger-
+draw, "Recipient Name" text field above it) → 3) Photo capture (auto, min 1 required,
+camera opens directly) → 4) Discrepancy toggle: "Everything OK" / "Report Issue"
+(opens same Issue Type picker as Loader's flag flow: Missing / Damaged / Refused) →
+[Complete Delivery].
+Confirmation screen: green check animation + "Stop 4 complete — 5 remaining" +
+auto-advances to next-stop nav after 3 sec.
+Waypoint Group – Delivery Planning System: UI/UX Wireframe Spec
+Page 7 of 11
+=== PAGE 8 ===
+4.5 Offline Mode & Local Storage
+Persistent status chip in top bar: " 🟢  Online" / " 🟡  Offline — 3 actions queued" / " 🔴  No
+signal since 14:10."
+All POD, arrival, and issue actions write to local storage first and queue for sync;
+nothing blocks on network.
+On reconnect: toast "Reconnected — syncing 3 updates…" followed by " ✓  All updates
+synced" or, on conflict (e.g., dispatcher re-routed while offline), a review sheet: "Route
+changed while you were offline — 1 stop added, 1 removed. [Review Changes]".
+Full offline map caching pre-downloaded for the day's route corridor (esp. Hill
+Country/Kandy corridor) at shift start, shown via a "Offline maps ready for today's
+route ✓ " confirmation on login.
+5. Role 4 — Store Manager (Outlets, desktop/mobile responsive)
+Responsive single-codebase layout: desktop = 2-column (main + side panel), mobile =
+stacked single column with bottom tab bar ( Orders  · Track  · Deferred  · Receipts  ·
+Calendar ).
+5.1 Order Entry & Confirmation Desk
+Form: Product  (searchable catalog picker) → Quantity  → Add to Cart ; running cart
+summary panel on the right (desktop) / collapsible drawer (mobile).
+Cutoff indicator pinned above the submit button: "Cutoff 4:00 PM — 1h 12m remaining"
+(turns red under 15 min).
+Submit button: [Place Order] → immediate confirmation card: " ✓  Order #4471
+confirmed — Expected delivery window 9:00–11:00 AM tomorrow."
+Past-cutoff state: submit button becomes [Add to Next Cycle] with copy "Cutoff
+passed — this order joins tomorrow's 4 PM cycle."
+5.2 Live Delivery Status & ETA Tracker
+Card per active order: Order #4471  · status pill (Assigned / En Route / Arriving /
+Delivered) · mini-map thumbnail with live driver pin · "Driver: K. Perera · ETA 10:42 AM
+(updates live)".
+Tapping expands to full map + stop sequence context: "You are stop 4 of 9 on this run."
+Push/in-app notification at 3 stops out: "Your delivery is 3 stops away — estimated
+arrival 10:40 AM."
+Waypoint Group – Delivery Planning System: UI/UX Wireframe Spec
+Page 8 of 11
+=== PAGE 9 ===
+5.3 Deferred Order Notification Hub
+Dedicated tab, list view: Order ID  · Original ETA  · New ETA  · Reason  (plain-
+language, e.g. "Vehicle capacity — reassigned to next available run") · [View Details] .
+Top-of-list banner on new deferral: " ⚠  Order #4471 has been rescheduled — new
+window 2:00–4:00 PM today."
+Each entry has [Acknowledge] to clear the unread badge, and [Contact Dispatch] for
+disputes.
+5.4 Receipt Confirmation & Claim Portal
+On driver-marked delivery, an in-app prompt fires: "Delivery arrived — confirm receipt"
+→ checklist mirroring the driver's manifest → [Confirm Receipt] (digital signature
+capture) or [Report Discrepancy].
+Discrepancy flow: same Issue Type picker (Missing/Damaged/Wrong Item) → photo
+upload → notes → [Submit Claim] → generates Claim #C-4471-01  with tracked status
+(Submitted → Under Review → Resolved).
+Digital receipt auto-generated as a PDF-style card: itemized list, driver name,
+timestamp, signature thumbnail — [Download Receipt].
+5.5 Special Calendar View
+Extends the shared <CalendarWidget>  (§1.2) with an outlet-specific promotional layer:
+days highlighted for store-specific festival promotions or bulk-delivery scheduling, each
+with a [Pre-order for this event] shortcut that jumps to Order Entry with a suggested
+quantity multiplier pre-filled (e.g. "+40% suggested for Vesak week").
+Waypoint Group – Delivery Planning System: UI/UX Wireframe Spec
+Page 9 of 11
+=== PAGE 10 ===
+6. Degradation & Failure Scenario Wireframes
+6.1 Driver Offline Recovery Flow
+flowchart TD
+    A[Signal lost] --> B[Status chip: Offline]
+    B --> C[Driver continues: arrivals, POD, issues all queue locally]
+    C --> D{Signal restored?}
+    D -- No --> C
+    D -- Yes --> E[Toast: Reconnected — syncing N updates]
+    E --> F{Conflicts with dispatcher changes?}
+    F -- No --> G[Toast: All updates synced]
+    F -- Yes --> H[Review Changes sheet shown]
+    H --> I[Driver taps Acknowledge]
+    I --> G
+Screen specs:
+Offline banner (persistent, non-blocking, top of screen): amber background, " 🟡
+Offline since 14:10 — 3 actions saved locally, will sync automatically."
+Sync-in-progress overlay (brief, ~2 sec): spinner + "Syncing 3 updates…" — does not
+block map interaction underneath.
+Conflict review sheet (only when the dispatcher altered the route during the offline
+window): title "Your route changed while offline", body list + Added: Stop 6 —
+Gampola Grocers  / − Removed: Stop 3 — deferred by dispatcher , single button
+[Got it — Update My Route].
+Data integrity rule: every locally-queued action carries a client-generated UUID +
+timestamp so duplicate syncs are rejected server-side (idempotent write) — no
+wireframe surface for this, but it governs what "synced" is allowed to mean.
+Waypoint Group – Delivery Planning System: UI/UX Wireframe Spec
+Page 10 of 11
+=== PAGE 11 ===
+6.2 Loading Shortfall Flow (Loader)
+flowchart TD
+    A[Loader ticks item] --> B{Item present & undamaged?}
+    B -- Yes --> C[Green check, manifest count updates]
+    B -- No --> D[Long-press / Flag Item]
+    D --> E[Issue Type sheet: Missing / Damaged / Quantity Mismatch]
+    E --> F[Photo required if Damaged]
+    F --> G[Submit Flag]
+    G --> H[Item marked Exception — red badge]
+    H --> I[Dispatcher notified in real time]
+    I --> J{Run can still depart?}
+    J -- Yes, exceptions noted --> K[Confirm Load Complete]
+    J -- No, critical shortfall --> L[Dispatcher re-run Fleet Allocation for 
+affected stop]
+Screen specs:
+Exception badge: red dot + count in the manifest card header, e.g. "Run #204 — 1
+exception."
+Dispatcher-side mirror: the Fleet Allocation Engine (§2.3) shows a live toast the
+moment a flag is submitted: " ⚠  Van 04 — Item flagged Missing (SKU 88213) — outlet:
+Kandy Pharmacy." Dispatcher can either accept the shortfall (outlet notified
+automatically via the Deferred Order hub, §5.3, if the missing item is order-critical) or
+trigger a re-allocation.
+Store Manager-side mirror: if a flagged shortfall affects their order, it surfaces as a
+Deferred Order Notification (§5.3) with reason auto-filled: "Partial shortfall at dispatch
+— 1 item unavailable, rest of order proceeding as scheduled."
+Sign-off gate: [Confirm Load Complete] remains enabled with exceptions present (a
+full stop is not required for a single flagged item), but is disabled entirely if a critical
+item (flagged "Quantity Mismatch" on a Fresh-priority order) is unresolved — forcing
+dispatcher intervention before departure.
+Waypoint Group – Delivery Planning System: UI/UX Wireframe Spec
+Page 11 of 11
